@@ -1,0 +1,93 @@
+// breakpoints
+$breakpoints: (
+    "small": (
+        min-width: 767px
+    ),
+    "medium": (
+        min-width: 992px
+    ),
+    "large": (
+        min-width: 1200px
+    ),
+    "4k": (
+        min-width: 1600px
+    )
+) !default;
+
+$font: "Poppins", sans-serif;
+// declaring variables for the colors
+
+$black: #000000;
+$white: #ffffff;
+
+$primary: #000000;
+
+$secondary1: #31e8f3;
+$secondary2: #ff78b9;
+
+@import "./palatte";
+
+// declaring variables for fonts
+
+//sizes
+$textxs : 0.75rem;
+$textsm : 0.875rem;
+$textmd : 1rem;
+$textlg : 1.125rem;
+$textxl : 1.25rem;
+$text2xl : 1.5rem;
+$text3xl : 1.875rem;
+$text4xl : 2.25rem;
+$text5xl : 3rem;
+$text6xl : 4rem;
+
+//Weights
+$textLight: 300;
+$textNormal: 400;
+$textSemibold: 500;
+$textBold: 600;
+$textBolder: 700;
+$textBlack: 900;
+
+// declaring variables for padding
+$spacing0: 0;
+$spacing1: 0.25rem;
+$spacing2: 0.5rem;
+$spacing3: 0.75rem;
+$spacing4: 1rem;
+$spacing5: 1.25rem;
+$spacing6: 1.5rem;
+$spacing8: 2rem;
+$spacing10: 2.5rem;
+$spacing12: 3rem;
+$spacing16: 4rem;
+$spacing20: 5rem;
+$spacing24: 6rem;
+$spacing32: 8rem;
+$spacing40: 10rem;
+$spacing48: 12rem;
+$spacing56: 14rem;
+$spacing64: 16rem;
+
+//gradient
+$gradient1: linear-gradient(94.48deg, #31e8f3 -4.23%, #ff78b9 102.89%);
+$gradient2: linear-gradient(
+    162.7deg,
+    #08535e 8.71%,
+    #000000 46.63%,
+    #55022a 92.38%
+);
+
+// Shadow
+
+$shadow1: 0px 0px 5px rgba(0, 0, 0, 0.05), 0px 25px 35px rgba(0, 0, 0, 0.03);
+$shadow2: 0px 2px 5px rgba(0, 0, 0, 0.05);
+$shadow3: 0px 0px 8.05556px rgba(0, 0, 0, 0.05),
+    0px 40.2778px 56.3889px rgba(0, 0, 0, 0.08);
+
+//Radio and checkbox
+
+$selectionColor: #ff78b9;
+$error: #f34e4e;
+$inputBorder: #7bb9fa;
+$grayBorder: #d0d0d0;

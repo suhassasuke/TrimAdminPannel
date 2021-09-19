@@ -1,0 +1,37 @@
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3,
+.MuiTypography-h4,
+.MuiTypography-h5,
+.MuiTypography-h6,
+.MuiTypography-body1,
+.MuiTypography-body2,
+.MuiChip-root,
+.MuiButton-root {
+	font-family: $font;
+}
+.MuiButton-containedPrimary {
+	// background-color: $orange600;
+	// color: $white;
+	// &:hover,
+	// &:focus {
+	// 	background-color: $orange600;
+	// 	box-shadow: $buttonBoxShadow;
+	// }
+	// &.Mui-disabled {
+	// 	background: $orange600;
+	// 	color: $white;
+	// }
+}
+.MuiInputBase-root {
+	// background: $white;
+	// box-shadow: $boxShadow1;
+
+	// .MuiOutlinedInput-notchedOutline {
+	// 	border-color: $gray300;
+	// }
+	// &.Mui-focused .MuiOutlinedInput-notchedOutline {
+	// 	border-color: $black;
+	// 	border-width: 1px;
+	// }
+}

@@ -1,0 +1,14 @@
+@import "../../../style/init/variables";
+
+.tz__header {
+    position: relative;
+    height: 60px;
+    z-index: 100;
+    background-color: $black;
+    .headerLinks{
+        color: $white;
+        &:hover{
+            color: $white
+        }
+    }
+}   

@@ -1,0 +1,19 @@
+@mixin borders($colorString, $color, $width) {
+    .border--#{$colorString}__#{$width} {
+        border: #{$width}px solid #{$color};
+    }
+}
+
+$borders: (
+    "primary": $primary,
+    "input": $inputBorder,
+    "error": $error,
+    "gray": $grayBorder
+);
+
+$widths: (1, 2);
+@each $width in $widths {
+    @each $colorString, $color in $borders {
+        @include borders($colorString, $color, $width);
+    }
+}

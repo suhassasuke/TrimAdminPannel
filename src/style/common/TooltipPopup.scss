@@ -1,0 +1,17 @@
+.tz__tooltipPopup {
+    @include absolute();
+    border-radius: 4px;
+    box-shadow: $shadow1;
+    &.tz__tooltipPopup--alignLeft {
+        @include absolute($left: 0);
+    }
+    &.tz__tooltipPopup--alignRight {
+        @include absolute($right: 0);
+    }
+    .arrowUp {
+        height: 21px;
+        width: 21px;
+        border-radius: 3px;
+        @include absolute($right: 14px, $top: -5px, $transform: rotate(-45deg));
+    }
+}

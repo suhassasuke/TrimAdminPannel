@@ -1,0 +1,136 @@
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+code,
+del,
+dfn,
+em,
+img,
+q,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+/* /END RESET */
+body {
+    font-family: $font;
+    font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $primary;
+    font-family: $font;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 0 0 15px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 0 0 12px;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 15px;
+    margin: 0 0 12px;
+    font-weight: normal;
+}
+
+h4,
+h5,
+h6 {
+    margin: 5px 0 5px;
+    font-weight: bold;
+}
+
+a img {
+    border: none;
+    outline: none;
+}
+
+a {
+    color: $primary;
+    outline: none;
+    text-decoration: none;
+}
+
+a:hover {
+    color: $primary;
+}
+section {
+    width: 100%;
+    padding: 50px 0;
+}
+img{
+    max-width: 100%;
+}
+/* remove dotted lines on some links in FF browser */
+
+a,
+a:active,
+a:visited,
+a img {
+    outline: none;
+}

@@ -1,0 +1,41 @@
+@mixin sizes($sizeString, $size) {
+    .font__size--#{$sizeString} {
+        font-size: #{$size};
+    }
+}
+@mixin weights($weightString, $weight) {
+    .font__weight--#{$weightString} {
+        font-weight: #{$weight};
+    }
+}
+
+$sizes: (
+    "xs": $textxs,
+    "sm": $textsm,
+    "md": $textmd,
+    "lg": $textlg,
+    "xl": $textxl,
+    "2xl": $text2xl,
+    "3xl": $text3xl,
+    "4xl": $text4xl
+);
+$weights: (
+    "300": $textLight,
+    "400": $textNormal,
+    "500": $textSemibold,
+    "600": $textBold,
+    "700": $textBolder,
+    "900": $textBlack
+);
+
+@each $sizeString, $size in $sizes {
+    @include sizes($sizeString, $size);
+}
+
+@each $weightString, $weight in $weights {
+    @include weights($weightString, $weight);
+}
+
+.text-decoration__underline {
+    text-decoration: underline;
+}

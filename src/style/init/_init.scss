@@ -1,0 +1,150 @@
+@import "./variables";
+@import "./reset";
+@import "./mixin";
+
+@import "./borders";
+@import "./margin";
+@import "./padding";
+@import "./typography";
+
+@import "./materialOveride";
+
+@import "./responsive";
+
+//Height
+.h-50 {
+    height: 50%;
+}
+.h-100 {
+    height: 100%;
+}
+
+//Width
+.w-50 {
+    width: 50%;
+}
+.w-100 {
+    width: 100%;
+}
+
+//Text align
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+
+//border radius
+.borderRadius__0 {
+    @include borderRadius(0);
+}
+.borderRadius__4 {
+    @include borderRadius(4);
+}
+
+//buttons
+button {
+    @include borderRadius(4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    max-height: 55px;
+    font-size: $textmd;
+    &:hover {
+        box-shadow: $shadow1;
+    }
+    &.button--primary {
+        background: $primary;
+        border: 2px solid $primary;
+        color: $white;
+        &:hover {
+            color: inherit;
+            background: inherit;
+        }
+    }
+    &.button--secondary {
+        background: $white;
+        border: 2px solid $primary;
+        color: $primary;
+        &:hover {
+            color: inherit;
+            background: inherit;
+        }
+    }
+    &.button--small {
+        padding: $spacing2 $spacing8;
+    }
+    &.button--large {
+        padding: $spacing4;
+    }
+}
+
+// Display
+
+.d-flex {
+    display: flex;
+}
+.d-inlineflex {
+    display: inline-flex;
+}
+.d-block {
+    display: block;
+}
+.d-inlineblock {
+    display: inline-block;
+}
+.d-inline {
+    display: inline;
+}
+.d-none {
+    display: none;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.justify-content-start {
+    justify-content: flex-start;
+}
+.justify-content-end {
+    justify-content: flex-end;
+}
+.align-items-center {
+    align-items: center;
+}
+.align-items-end {
+    align-items: flex-end;
+}
+.align-items-start {
+    align-items: flex-start;
+}
+
+//position
+.position-relative {
+    @include relative();
+}
+.position-absolute {
+    @include absolute();
+}
+
+// boxShadow
+.boxShadow-1 {
+    box-shadow: $shadow1;
+}
+.boxShadow-2 {
+    box-shadow: $shadow2;
+}
+.boxShadow-3 {
+    box-shadow: $shadow3;
+}
+
+//section
+
+.section {
+    padding: $spacing16 $spacing0;
+    .section__fullscreen--maxHeight {
+        max-height: 100vh;
+    }
+    .section__fullscreen--minHeight {
+        min-height: 100vh;
+    }
+}

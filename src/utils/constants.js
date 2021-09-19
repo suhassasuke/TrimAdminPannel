@@ -1,0 +1,3 @@
+const BREAKPOINTS = [540, 768, 992, 1440, 1600];
+
+export { BREAKPOINTS };
