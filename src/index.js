@@ -2,29 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./style/index.scss";
 import App from "./routes/App";
+import { Provider } from "react-redux";
+import { store } from "./redux/store"; // importing the redux store
+
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core";
 import __globals from "./style/init/__globals";
 
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker
-        .register("/firebase-messaging-sw.js")
-        .then(function (registration) {
-            console.log(
-                "Registration successful, scope is:",
-                registration.scope
-            );
-        })
-        .catch(function (err) {
-            console.log("Service worker registration failed, error:", err);
-        });
-}
-
 ReactDOM.render(
     <React.StrictMode>
-        <ThemeProvider theme={__globals}>
-            <App />
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={__globals}>
+                <App />
+            </ThemeProvider>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );

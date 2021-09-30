@@ -3,6 +3,8 @@ import { Switch, BrowserRouter as Router } from "react-router-dom";
 import PublicRoute from "./auth/common/PublicRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { commonUrls } from "../urls/routeUrls";
+import ToastServiceAlert from "../components/common/ToastServiceAlert";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = React.lazy(() => import("../components/common/Header/index"));
 const Login = React.lazy(() =>
@@ -13,8 +15,8 @@ const Register = React.lazy(() =>
 );
 
 function Routes(props) {
-    const [popupType, setPopupType] = useState("login");
-    const [isPopupOpen, setPopupOpen] = useState(false);
+    const alert = useSelector((state) => state.ToastServiceReducer);
+
     return (
         <>
             <Suspense
@@ -37,6 +39,7 @@ function Routes(props) {
                             render={(props) => <Register {...props} />}
                         />
                     </Switch>
+                    <ToastServiceAlert alert={alert} />
                 </Router>
             </Suspense>
         </>

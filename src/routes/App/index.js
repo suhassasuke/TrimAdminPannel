@@ -1,49 +1,30 @@
 import React from "react";
 import { StylesProvider } from "@material-ui/core/styles";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useHistory } from "react-router-dom";
 import Routes from "../Routes";
-import { useState, useEffect } from "react";
-import { getToken, onMessageListener } from "../../services/Firebase";
-import { Snackbar } from "@material-ui/core";
+import { useEffect } from "react";
+import { ToastService } from "../../redux/services/toast.services";
+import { toastActions } from "../../redux/actions/common/ToastService.action";
+import { getToastMessage } from "../../utils/helper";
 
-const App = () => {
-    const [showHeader, setShowHeader] = useState(false);
-    const [showLoginPopup, setShowLoginPopup] = useState(false);
-    const [isTokenFound, setTokenFound] = useState(false);
-    const [notification, setNotification] = useState({ title: "", body: "" });
-    const [showNotification, setShowNotification] = useState(false);
+const App = (props) => {
+    const history = useHistory();
+
     useEffect(() => {
-        getToken(setTokenFound);
+        // history.listen((location, action) => {
+        //     // clear alert on location change
+        //     dispatch(toastActions.clear());
+        // });
     }, []);
-    onMessageListener()
-        .then((payload) => {
-            setShowNotification(true);
-            setNotification({
-                title: payload.notification.title,
-                body: payload.notification.body
-            });
-            console.log(payload);
-        })
-        .catch((err) => console.log("failed: ", err));
+
     return (
         <StylesProvider injectFirst>
             <div className="App">
                 <Router>
-                    <Routes
-                        showHeader={showHeader}
-                        setShowHeader={setShowHeader}
-                        showLoginPopup={showLoginPopup}
-                        setShowLoginPopup={setShowLoginPopup}
-                    />
+                    <Routes />
                 </Router>
-                <Snackbar
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                    open={showNotification}
-                    onClose={() => setShowNotification(false)}
-                    message={notification.body}
-                    key={"bottomright"}
-                />
             </div>
+            {alert.message && getToastMessage(alert)}
         </StylesProvider>
     );
 };

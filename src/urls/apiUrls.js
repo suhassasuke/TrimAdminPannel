@@ -1,5 +1,10 @@
+const apiUrl = process.env.REACT_APP_API_URL;
 export const userUrls = {
-    LOGIN: "something",
-    REGISTER: "something",
-    DELETE: "something"
+    getUrlByUserType: (type) => {
+        return {
+            LOGIN: "something",
+            REGISTER: `${apiUrl}/${type}/register_freelancer`,
+            DELETE: "something"
+        };
+    }
 };

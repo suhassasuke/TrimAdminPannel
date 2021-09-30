@@ -1,4 +1,4 @@
-import { API } from "../../constants/common/Api.Types";
+import { API } from "../../constants/common/api.type";
 
 
 // action creator funtion

@@ -3,8 +3,9 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer from "./reducers";
+import apiMiddleware from "./middlewares";
 
-const middlewares = [];
+const middlewares = [apiMiddleware];
 if (process.env.NODE_ENV === "development") {
     const loggerMiddleware = createLogger();
     middlewares.push(loggerMiddleware);

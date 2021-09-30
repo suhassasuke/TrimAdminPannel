@@ -1,16 +1,18 @@
-import { userUrls } from "../../../urls/Users/apiUrls";
+import { userUrls } from "../../../urls/apiUrls";
 import { userConstants } from "../../constants/auth/user.constants";
+import { API_ERROR } from "../../constants/common/api.type";
 import actionCreator from "../common/actionCreator";
 
 function login(username, password, from) {
     return actionCreator({
         method: "POST",
         data: { username, password },
-        url: userUrls.LOGIN,
+        url: userUrls.getUrlByUserType("freelancer"),
         onSuccess: (resp) => success(resp),
         onFailure: (error) => failure(error),
         label: userConstants.LOGIN_REQUEST
     });
+
     function success(resp) {
         return { type: userConstants.LOGIN_SUCCESS, payload: resp };
     }
@@ -24,11 +26,11 @@ function logout() {
     return { type: userConstants.LOGOUT, payload: {} };
 }
 
-function register(data) {
+function register(data, type) {
     return actionCreator({
         method: "POST",
         data,
-        url: userUrls.REGISTER,
+        url: userUrls.getUrlByUserType(type).REGISTER,
         onSuccess: (resp) => success(resp),
         onFailure: (error) => failure(error),
         label: userConstants.REGISTER_REQUEST
@@ -37,7 +39,7 @@ function register(data) {
         return { type: userConstants.REGISTER_SUCCESS, payload: resp };
     }
     function failure(error) {
-        return { type: userConstants.REGISTER_FAILURE, payload: error };
+        return { type: userConstants.REGISTER_FAILURE };
     }
 }
 
