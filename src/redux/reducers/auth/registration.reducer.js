@@ -1,6 +1,6 @@
 import createReducer from "../../../utils/createReducer";
 import { registrationConstants } from "../../constants/auth/registration.type";
-import { API_START, API_END, API_ERROR } from "../../constants/common/api.type";
+import { API_START, API_END } from "../../constants/common/api.type";
 
 const initialState = {
     isRegistering: false,
@@ -10,7 +10,7 @@ const initialState = {
         first_name: "",
         last_name: "",
         email: "",
-        number: "",
+        mobile: "",
         gender: "",
         year_of_experience: "",
         password: ""

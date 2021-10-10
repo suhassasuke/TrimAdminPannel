@@ -89,7 +89,7 @@ export default function SignUp(props) {
         {
             row: [
                 {
-                    name: "number",
+                    name: "mobile",
                     type: "text",
                     label: "Mobile Number",
                     required: true,
@@ -179,7 +179,7 @@ export default function SignUp(props) {
         first_name: "",
         last_name: "",
         email: "",
-        number: "",
+        mobile: "",
         gender: "",
         year_of_experience: "",
         password: ""
@@ -234,7 +234,28 @@ export default function SignUp(props) {
     }
     function registerUser() {
         if (!validateInputFields()) {
-            dispatch(register(user, "freelancer"));
+            const {
+                first_name,
+                last_name,
+                gender,
+                mobile,
+                email,
+                password,
+                year_of_experience
+            } = user;
+            let _jsonResponse = {
+                user_details: {
+                    first_name,
+                    last_name,
+                    gender,
+                    mobile: "+91" + mobile,
+                    email,
+                    password,
+                    role: "freelancer"
+                },
+                year_of_experience
+            };
+            dispatch(register(_jsonResponse, "freelancer"));
         }
     }
     React.useEffect(() => {
