@@ -3,8 +3,8 @@ import { Switch, BrowserRouter as Router } from "react-router-dom";
 import PublicRoute from "./auth/common/PublicRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { commonUrls } from "../urls/routeUrls";
-import ToastServiceAlert from "../components/common/ToastServiceAlert";
-import { useSelector, useDispatch } from "react-redux";
+import LocalStorageService from "../services/LocalStorage";
+import PrivateRoute from "./auth/common/PrivateRoute";
 
 const Header = React.lazy(() => import("../components/common/Header/index"));
 const Login = React.lazy(() =>
@@ -13,10 +13,11 @@ const Login = React.lazy(() =>
 const Register = React.lazy(() =>
     import("../components/common/EntryManagement/Register/Register")
 );
+const Dashboard = React.lazy(() =>
+    import("../components/DashBoard")
+);
 
-function Routes(props) {
-    const alert = useSelector((state) => state.ToastServiceReducer);
-
+function Routes() {
     return (
         <>
             <Suspense
@@ -27,6 +28,9 @@ function Routes(props) {
                 }
             >
                 <Router>
+                    {LocalStorageService.getAccessToken("tza_access_token") && (
+                        <Header />
+                    )}
                     <Switch>
                         <PublicRoute
                             path={commonUrls.login}
@@ -38,8 +42,12 @@ function Routes(props) {
                             exact
                             render={(props) => <Register {...props} />}
                         />
+                        <PrivateRoute
+                            path="/"
+                            exact
+                            render={(_props) => <Dashboard {..._props} />}
+                        />
                     </Switch>
-                    <ToastServiceAlert alert={alert} />
                 </Router>
             </Suspense>
         </>

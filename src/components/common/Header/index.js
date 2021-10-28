@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "./header.scss";
 
 export default function Header(props) {
-    const { loggedin = false } = props;
         
     return (
         <Grid container className="tz__header" id="TZ__header">

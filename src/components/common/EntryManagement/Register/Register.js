@@ -6,10 +6,9 @@ import { commonUrls } from "../../../../urls/routeUrls";
 import PageWrapper from "../PageWrapperEM";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
-import { register } from "../../../../redux/actions/auth/user.action";
-import { userUrls } from "../../../../urls/apiUrls";
+import {  userActions } from "../../../../redux/actions/auth/user.action";
 import { registrationActions } from "../../../../redux/actions/auth/registration.action";
-import ToastService from "../../../../redux/services/toast.services";
+import ToastService from "../../../../services/toast.services";
 
 export default function SignUp(props) {
     const dispatch = useDispatch();
@@ -200,7 +199,7 @@ export default function SignUp(props) {
             dispatch(registrationActions.updateErrorMsgs(_errorMsgs));
         }
         userDetails[_n] = _v;
-        setUser((user) => ({ ...user, [_n]: _v }));
+        setUser((_user) => ({ ..._user, [_n]: _v }));
         dispatch(registrationActions.updateUserDetails(userDetails));
     }
     function validateInputFields() {
@@ -255,7 +254,7 @@ export default function SignUp(props) {
                 },
                 year_of_experience
             };
-            dispatch(register(_jsonResponse, "freelancer"));
+            dispatch(userActions.register(_jsonResponse, "freelancer"));
         }
     }
     React.useEffect(() => {

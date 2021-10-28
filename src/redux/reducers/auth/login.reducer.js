@@ -1,23 +1,19 @@
 import createReducer from "../../../utils/createReducer";
-import { API_START, API_END } from "../../constants/common/api.type";
+import { userConstants } from "../../constants/auth/user.constants";
 
 const initialState = {
-    isLoggingIn: null,
-    isLoggedIn: null,
-    userDetails: {
-        email: "",
-        password: ""
-    }
+    status: null,
+    redirect: null,
+    userDetails: null,
 };
 
 export const reducerObj = {
-    [API_START]: (prevState, payload) => {
-        if (payload === "") {
-        }
-    },
-    [API_END]: (prevState, payload) => {
-        if (payload === "") {
-        }
+    [userConstants.LOGIN_SUCCESS]: (prevState, payload) => {
+        return {
+            status: 200,
+            redirect: payload.redirectTo,
+            userDetails: payload.resp,
+        };
     }
 };
 

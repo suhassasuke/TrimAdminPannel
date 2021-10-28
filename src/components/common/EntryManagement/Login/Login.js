@@ -1,19 +1,27 @@
-import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import React from "react";
 import CustomInput from "../../CustomInput";
-import { ReactComponent as Google } from "../../../../assets/images/google.svg";
-import { ReactComponent as Facebook } from "../../../../assets/images/facebook.svg";
+// import { ReactComponent as Google } from "../../../../assets/images/google.svg";
+// import { ReactComponent as Facebook } from "../../../../assets/images/facebook.svg";
 import { useHistory } from "react-router-dom";
 import { commonUrls } from "../../../../urls/routeUrls";
 import PageWrapper from "../PageWrapperEM";
 import "../styleEM.scss";
 import clsx from "clsx";
-import ToastService from "../../../../redux/services/toast.services";
-import { login } from "../../../../redux/actions/auth/user.action";
-import { useDispatch } from "react-redux";
+import { userActions } from "../../../../redux/actions/auth/user.action";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthDetails } from "../../../../redux/actions/auth/auth.actions";
+import ToastService from "../../../../services/toast.services";
+import { userServices } from "../../../../services/user.services";
 
 export default function SignIn(props) {
     const history = useHistory();
+    const { status, redirect, userDetails } = useSelector(
+        (state) => state.LoginReducer
+    );
+    const { user, role, authenticated } = useSelector(
+        (state) => state.AuthReducer
+    );
     const [loginDetails, setLoginDetails] = React.useState({
         email: "",
         password: ""
@@ -22,6 +30,7 @@ export default function SignIn(props) {
         email: "",
         password: ""
     });
+    const [loginButtonDisabled, setLoginButtonDisabled] = React.useState(false);
     const [redirectTo, setRedirectTo] = React.useState("");
     const dispatch = useDispatch();
 
@@ -42,7 +51,7 @@ export default function SignIn(props) {
         }
     ];
     function handleChange(_v, _n, _e, _m, _evt) {
-        setLoginDetails((user) => ({ ...user, [_n]: _v }));
+        setLoginDetails((_user) => ({ ..._user, [_n]: _v }));
     }
     function validateLoginDetails() {
         let _isError = false;
@@ -73,13 +82,39 @@ export default function SignIn(props) {
         return _isError;
     }
     function loginUser() {
+        setLoginButtonDisabled(true);
         if (!validateLoginDetails()) {
-            // ToastService.success("Account created successfully");
             dispatch(
-                login(loginDetails.email, loginDetails.password, redirectTo)
+                userActions.login(
+                    loginDetails.email,
+                    loginDetails.password,
+                    redirectTo
+                )
             );
+        } else {
+            setLoginButtonDisabled(false);
         }
     }
+    React.useEffect(() => {
+        if (status) {
+            if (status !== 200) {
+                ToastService.error(userDetails.message);
+                setLoginButtonDisabled(false);
+            } else {
+                ToastService.success(userDetails.message);
+                dispatch(setAuthDetails(userDetails));
+            }
+        }
+    }, [status]);
+    React.useEffect(() => {
+        if (authenticated === true) {
+            userServices.setAuthInit(user);
+            if (redirect) {
+                history.push(redirect);
+            }
+            history.push("/");
+        }
+    }, [authenticated]);
     React.useEffect(() => {
         if (
             props.location.state &&
@@ -101,7 +136,6 @@ export default function SignIn(props) {
                                         component="div"
                                         display=""
                                         className={clsx("px-3")}
-                                        // width="100%"
                                         key={_i}
                                     >
                                         <CustomInput
@@ -132,32 +166,11 @@ export default function SignIn(props) {
                             className="button--primary w-100 p-3"
                             disableRipple={true}
                             onClick={loginUser}
+                            disabled={loginButtonDisabled}
                         >
-                            {"Log in"}
+                            {loginButtonDisabled ? "Logging in ..." : "Log in"}
                         </Button>
                     </form>
-
-                    {/* <Grid container spacing={4} className="mb-2">
-                        <Grid item md={6}>
-                            <Typography
-                                variant="body1"
-                                className="font__size--sm"
-                            >
-                                {"Remember me"}
-                            </Typography>
-                        </Grid>
-                        <Grid item md={6}>
-                            <Typography
-                                variant="caption"
-                                className="text-decoration__underline cursor__pointer"
-                                onClick={() => {
-                                    history.push(commonUrls.forgotPassword);
-                                }}
-                            >
-                                {"Forgot Password?"}
-                            </Typography>
-                        </Grid>
-                    </Grid> */}
                     <Typography variant="body1" className="font__size--sm">
                         {"Don’t have an account? "}
                         <Typography

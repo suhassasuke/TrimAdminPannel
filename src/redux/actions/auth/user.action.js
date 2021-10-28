@@ -1,29 +1,24 @@
 import { userUrls } from "../../../urls/apiUrls";
 import { userConstants } from "../../constants/auth/user.constants";
-import { API_ERROR } from "../../constants/common/api.type";
 import actionCreator from "../common/actionCreator";
 
-function login(username, password, from) {
+function login(email, password, from) {
     return actionCreator({
         method: "POST",
-        data: { username, password },
-        url: userUrls.getUrlByUserType("freelancer"),
+        data: { email, password },
+        url: userUrls.getUrlByUserType("freelancers").LOGIN,
         onSuccess: (resp) => success(resp),
         onFailure: (error) => failure(error),
         label: userConstants.LOGIN_REQUEST
     });
 
     function success(resp) {
-        return { type: userConstants.LOGIN_SUCCESS, payload: resp };
+		console.log(resp);
+        return { type: userConstants.LOGIN_SUCCESS, payload: { resp, from } };
     }
     function failure(error) {
         return { type: userConstants.LOGIN_FAILURE, payload: error };
     }
-}
-
-function logout() {
-    localStorage.removeItem("tz_access_token");
-    return { type: userConstants.LOGOUT, payload: {} };
 }
 
 function register(data, type) {
@@ -60,4 +55,4 @@ function remove(data) {
     }
 }
 
-export { login, logout, register, remove };
+export const userActions = { login, register, remove };

@@ -5,7 +5,11 @@ import clsx from "clsx";
 toast.configure();
 
 const ToastService = (function () {
-    function _notify(message, position = toast.POSITION.TOP_RIGHT, className) {
+    function _notify(
+        message,
+        position = toast.POSITION.TOP_RIGHT,
+        className = ""
+    ) {
         return toast.info(message, {
             autoClose: true,
             className: clsx("toast_notify_error", className),
@@ -13,7 +17,11 @@ const ToastService = (function () {
         });
     }
 
-    function _success(message, position = toast.POSITION.TOP_RIGHT, className) {
+    function _success(
+        message,
+        position = toast.POSITION.TOP_RIGHT,
+        className = ""
+    ) {
         return toast.success(message, {
             autoClose: true,
             className: clsx("toast_notify_success", className),
@@ -21,7 +29,11 @@ const ToastService = (function () {
         });
     }
 
-    function _error(message, position = toast.POSITION.TOP_RIGHT, className) {
+    function _error(
+        message,
+        position = toast.POSITION.TOP_RIGHT,
+        className = ""
+    ) {
         return toast.error(message, {
             autoClose: true,
             className: clsx("toast_notify_error", className),
