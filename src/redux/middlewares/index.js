@@ -3,8 +3,6 @@ import LocalStorageService from "../../services/LocalStorage";
 import ToastService from "../../services/toast.services";
 import { API } from "../constants/common/api.type";
 import { accessDenied, apiError, apiStart, apiEnd } from "./middleware.action";
-// import { validateAccessToken } from "../../utils/validateAccessToken";
-// const moment = require("moment");
 
 const apiMiddleware =
     ({ dispatch }) =>
@@ -19,25 +17,22 @@ const apiMiddleware =
                 url,
                 method,
                 data,
-                accessToken,
                 onSuccess,
                 onFailure,
                 label,
+				accessToken,
                 headersOverride
             } = action.payload;
 
             // axios default configs
             axios.defaults.baseURL = process.env.REACT_APP_API_URL || "";
             axios.defaults.headers.common["Content-Type"] = "application/json";
-            // let currTimeUnix = moment().unix(); // secs
-
-            // let acc_token = await validateAccessToken().then(r => r)
-            // console.log('indexMiddleware', currTimeUnix, acc_token)
-
-            // axios.defaults.headers.common[
-            // 	"Authorization"
-            // ] = `Bearer ${acc_token}`;
-            // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+           
+            if (LocalStorageService.getAccessToken()) {
+                axios.defaults.headers.common[
+                    "Authorization"
+                ] = `JWT ${LocalStorageService.getAccessToken()}`;
+            }
 
             if (headersOverride) {
                 // adding new header for search api

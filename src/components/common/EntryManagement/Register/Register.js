@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@material-ui/core";
 import React from "react";
 import CustomInput from "../../CustomInput";
 import { Link } from "react-router-dom";
-import { commonUrls } from "../../../../urls/routeUrls";
+import { routeUrls } from "../../../../urls/routeUrls";
 import PageWrapper from "../PageWrapperEM";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
@@ -372,14 +372,14 @@ export default function SignUp(props) {
                 <Typography variant="body1" className="font__size--sm">
                     {"By signing up, you agree to Photo’s "}
                     <Link
-                        to={commonUrls.login}
+                        to={routeUrls.commonUrls.login}
                         className="text-decoration__underline"
                     >
                         {"Terms of Service"}
                     </Link>{" "}
                     {" and "}
                     <Link
-                        to={commonUrls.login}
+                        to={routeUrls.commonUrls.login}
                         className="text-decoration__underline"
                     >
                         {"Privacy Policy"}

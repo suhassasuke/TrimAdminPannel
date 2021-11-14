@@ -1,7 +1,10 @@
 const commonUrls = {
+	home: '/',
     login: "/login",
     register: "/register",
-    forgotPassword: "/forgot-password"
+    forgotPassword: "/forgot-password",
+	dashboard: '/dashboard',
+	orders: '/orders'
 };
 
-export { commonUrls };
+export const routeUrls = { commonUrls };

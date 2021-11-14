@@ -1,13 +1,4 @@
 const LocalStorageService = (function () {
-    let __service;
-
-    function __getService() {
-        if (!__service) {
-            __service = this;
-            return __service;
-        }
-    }
-
     /**---set token in localStorage */
     function __setAccessToken(token) {
         window.localStorage.removeItem("tza_access_token");
@@ -28,11 +19,22 @@ const LocalStorageService = (function () {
         localStorage.removeItem("tza_access_token");
     }
 
+    /**---set role  to localStorage */
+    function __setRole(_role) {
+        window.localStorage.removeItem("tza_role");
+        localStorage.setItem("tza_role", _role);
+    }
+    /**---remove role  to localStorage */
+    function __removeRole(_role) {
+        window.localStorage.removeItem("tza_role");
+    }
+
     return {
-        getService: __getService,
         setAccessToken: __setAccessToken,
         getAccessToken: __getAccessToken,
-        removeAccessToken: __removeToken
+        removeAccessToken: __removeToken,
+        setRole: __setRole,
+        removeRole: __removeRole
     };
 })();
 

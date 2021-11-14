@@ -1,14 +1,55 @@
 @import "../../../style/init/variables";
 
-.tz__header {
+.tza__header {
     position: relative;
-    height: 60px;
+    height: 75px;
     z-index: 100;
     background-color: $black;
-    .headerLinks{
-        color: $white;
-        &:hover{
-            color: $white
+    .tza__header--logo__wrapper {
+        .tza__header--logo_img {
+            height: 30px;
+        }
+        .tza__header--logo_text {
+            color: $white;
+            font-weight: $textBold;
+            font-size: $textsm;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
     }
-}   
+    .tza__header--links__wrapper {
+
+        .tza__header--icons {
+			// display: inline-flex;
+			margin-bottom: $spacing1;
+			padding: $spacing2 $spacing4;
+            .MuiBadge-badge {
+                min-width: 25px;
+				top: -4px;
+				color: $white;
+				font-weight: $textBold;
+            }
+			&.tza__header--notifications{
+				.MuiBadge-badge {
+					background-color: $secondary1;
+				}
+			}
+			&.tza__header--messages{
+				.MuiBadge-badge {
+					background-color: $secondary2;
+				}
+			}
+        }
+		.tza__header--profile{
+			display: inline-flex;
+			align-items: center;
+			padding: $spacing2 $spacing4;
+			.tza__header--username{
+				font-size: $textmd;
+				font-weight: $textSemibold;
+				margin-left: $spacing2;
+				color: $white;
+			}
+		}
+    }
+}

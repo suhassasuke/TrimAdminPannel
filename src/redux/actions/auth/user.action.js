@@ -1,4 +1,4 @@
-import { userUrls } from "../../../urls/apiUrls";
+import { apiUrls } from "../../../urls/apiUrls";
 import { userConstants } from "../../constants/auth/user.constants";
 import actionCreator from "../common/actionCreator";
 
@@ -6,7 +6,7 @@ function login(email, password, from) {
     return actionCreator({
         method: "POST",
         data: { email, password },
-        url: userUrls.getUrlByUserType("freelancers").LOGIN,
+        url: apiUrls.userUrls.getUrlByUserType("freelancers").LOGIN,
         onSuccess: (resp) => success(resp),
         onFailure: (error) => failure(error),
         label: userConstants.LOGIN_REQUEST
@@ -25,7 +25,7 @@ function register(data, type) {
     return actionCreator({
         method: "POST",
         data,
-        url: userUrls.getUrlByUserType(type).REGISTER,
+        url: apiUrls.userUrls.getUrlByUserType(type).REGISTER,
         onSuccess: (resp) => success(resp),
         onFailure: (error) => failure(error),
         label: userConstants.REGISTER_REQUEST
@@ -39,20 +39,20 @@ function register(data, type) {
 }
 
 function remove(data) {
-    return actionCreator({
-        method: "POST",
-        data,
-        url: userUrls.DELETE,
-        onSuccess: (resp) => success(resp),
-        onFailure: (error) => failure(error),
-        label: userConstants.DELETE_REQUEST
-    });
-    function success(resp) {
-        return { type: userConstants.DELETE_SUCCESS, payload: resp };
-    }
-    function failure(error) {
-        return { type: userConstants.DELETE_FAILURE, payload: error };
-    }
+    // return actionCreator({
+    //     method: "POST",
+    //     data,
+    //     url: userUrls.DELETE,
+    //     onSuccess: (resp) => success(resp),
+    //     onFailure: (error) => failure(error),
+    //     label: userConstants.DELETE_REQUEST
+    // });
+    // function success(resp) {
+    //     return { type: userConstants.DELETE_SUCCESS, payload: resp };
+    // }
+    // function failure(error) {
+    //     return { type: userConstants.DELETE_FAILURE, payload: error };
+    // }
 }
 
 export const userActions = { login, register, remove };

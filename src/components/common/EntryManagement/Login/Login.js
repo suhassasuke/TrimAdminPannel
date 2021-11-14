@@ -4,7 +4,7 @@ import CustomInput from "../../CustomInput";
 // import { ReactComponent as Google } from "../../../../assets/images/google.svg";
 // import { ReactComponent as Facebook } from "../../../../assets/images/facebook.svg";
 import { useHistory } from "react-router-dom";
-import { commonUrls } from "../../../../urls/routeUrls";
+import { routeUrls } from "../../../../urls/routeUrls";
 import PageWrapper from "../PageWrapperEM";
 import "../styleEM.scss";
 import clsx from "clsx";
@@ -102,7 +102,7 @@ export default function SignIn(props) {
                 setLoginButtonDisabled(false);
             } else {
                 ToastService.success(userDetails.message);
-                dispatch(setAuthDetails(userDetails));
+                dispatch(setAuthDetails(userDetails,'login'));
             }
         }
     }, [status]);
@@ -177,7 +177,7 @@ export default function SignIn(props) {
                             variant="caption"
                             className="text-decoration__underline cursor__pointer"
                             onClick={() => {
-                                history.push(commonUrls.register);
+                                history.push(routeUrls.commonUrls.register);
                             }}
                         >
                             {"Signup now"}

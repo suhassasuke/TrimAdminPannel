@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import LocalStorageService from "../../../services/LocalStorage";
-import { commonUrls } from "../../../urls/routeUrls";
+import { routeUrls } from "../../../urls/routeUrls";
 
 function PrivateRoute(props) {
+	console.log(LocalStorageService.getAccessToken(),'---');
     if (!LocalStorageService.getAccessToken()) {
-        return <Redirect to={commonUrls.login} />;
+        return <Redirect to={routeUrls.commonUrls.home} />;
     }
     return <Route {...props} />;
 }

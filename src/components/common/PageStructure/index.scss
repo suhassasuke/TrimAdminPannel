@@ -1,0 +1,50 @@
+@import "../../../style/init/variables";
+
+.tza__app--wrapper {
+    height: calc(100vh - 75px);
+    overflow-y: hidden;
+
+    .tza__app--sidebar {
+        width: 100px;
+        height: 100%;
+		border-right: 1px solid $grey300;
+
+        .tza__sidebar {
+            height: 100%;
+            & > div {
+                height: 100%;
+            }
+            .tza__sidebar--navlink_item {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+				background-color: $white;
+
+				.tza__sidebar--navlink-title {
+					span {
+						color: $grey400;
+						font-weight: $textSemibold;
+					}
+				}
+				&.Mui-selected {
+					background-color: $white;
+					.tza__sidebar--navlink-title {
+						span {
+							color: $black;
+						}
+					}
+				}
+            }
+        }
+    }
+    .tza__app--main {
+        width: calc(100% - 100px);
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+		.tza__app--main__wrapper{
+			padding: $spacing16;
+		}
+    }
+}
