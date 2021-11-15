@@ -112,7 +112,8 @@ export default function SignIn(props) {
             if (redirect) {
                 history.push(redirect);
             }
-            history.push("/");
+			props.setIsInitCheck(true);
+            history.push(routeUrls.commonUrls.dashboard);
         }
     }, [authenticated]);
     React.useEffect(() => {

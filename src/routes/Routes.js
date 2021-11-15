@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Suspense } from "react";
-import { Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import PublicRoute from "./auth/common/PublicRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { routeUrls } from "../urls/routeUrls";
@@ -12,6 +12,7 @@ import { setAuthDetails } from "../redux/actions/auth/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { apiUrls } from "../urls/apiUrls";
 import { checkEmptyObject } from "../utils/helper";
+import NoFoundComponent from "../components/404/404";
 
 const Header = React.lazy(() => import("../components/common/Header/index"));
 const Login = React.lazy(() =>
@@ -30,35 +31,31 @@ function Routes() {
     const token = LocalStorageService.getAccessToken();
 
     useEffect(() => {
-        if (token) {
-            if (!isInitCheck) {
-                if (!checkEmptyObject(user_details)) {
-                    setIsInitCheck(true);
-                    return false;
+        if (!isInitCheck) {
+            if (token === false) return false;
+            else if (!checkEmptyObject(user_details)) {
+                setIsInitCheck(true);
+                return false;
+            }
+            axios({
+                method: "get",
+                url: apiUrls.userUrls.USER_DETAILS,
+                headers: {
+                    Authorization: `JWT ${token}`
                 }
-                axios({
-                    method: "get",
-                    url: apiUrls.userUrls.USER_DETAILS,
-                    headers: {
-                        Authorization: `JWT ${token}`
+            })
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch(setAuthDetails(res.data));
+                        setIsInitCheck(true);
                     }
                 })
-                    .then((res) => {
-                        if (res.status === 200) {
-                            dispatch(setAuthDetails(res.data));
-                            setIsInitCheck(true);
-                        }
-                    })
-                    .catch((error) => {
-                        if (error.response && error.response.status === 401) {
-                            userServices.logout();
-                            return <Redirect to="/" />;
-                        }
-                    });
-            }
-        } else {
-            userServices.logout();
-            return <Redirect to="/" />;
+                .catch((error) => {
+                    if (error.response && error.response.status === 401) {
+                        userServices.logout();
+                        return <Redirect to="/" />;
+                    }
+                });
         }
     }, [dispatch, isInitCheck, user_details]);
     return (
@@ -76,22 +73,34 @@ function Routes() {
                         <PublicRoute
                             path={routeUrls.commonUrls.register}
                             exact
-                            render={(props) => <Register {...props} />}
+                            render={(props) => (
+                                <Register
+                                    setIsInitCheck={setIsInitCheck}
+                                    {...props}
+                                />
+                            )}
                         />
                         <PublicRoute
                             path={routeUrls.commonUrls.home}
                             exact
-                            render={(props) => <Login {...props} />}
-                        />
-                        <PrivateRoute
-                            path={routeUrls.commonUrls.dashboard}
-                            exact
-                            render={(_props) => (
-                                <AppWrapper isSidebar={true}>
-                                    <Dashboard {..._props} />
-                                </AppWrapper>
+                            render={(props) => (
+                                <Login
+                                    setIsInitCheck={setIsInitCheck}
+                                    {...props}
+                                />
                             )}
                         />
+                        {isInitCheck && (
+                            <PrivateRoute
+                                path={routeUrls.commonUrls.dashboard}
+                                exact
+                                render={(_props) => (
+                                    <AppWrapper isSidebar={true}>
+                                        <Dashboard {..._props} />
+                                    </AppWrapper>
+                                )}
+                            />
+                        )}
 
                         {isInitCheck && (
                             <PrivateRoute
@@ -104,6 +113,7 @@ function Routes() {
                                 )}
                             />
                         )}
+                        
                     </Switch>
                 </Router>
             </Suspense>
