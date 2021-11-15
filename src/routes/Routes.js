@@ -38,7 +38,7 @@ function Routes() {
             }
             axios({
                 method: "get",
-                url: apiUrls.userUrls.USER_DETAILS,
+                url: apiUrls.userUrls.getUserDetailsByRole(LocalStorageService.getRole()),
                 headers: {
                     Authorization: `JWT ${token}`
                 }

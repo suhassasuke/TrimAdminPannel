@@ -7,12 +7,16 @@ const userUrls = {
             DELETE: "something"
         };
     },
-    USER_DETAILS: `${apiUrl}/api/user/user_details`
+	getUserDetailsByRole: (role)=> {
+		if(role === "freelancer"){
+			return `${apiUrl}/api/freelancers/freelancer_details`
+		}
+	}
 };
 const ordersUrls = {
     get_orders: `${apiUrl}/api/dashboard_details/booking_history`,
     getOrdersByStatus: (type, f_id) =>
-        `${apiUrl}/api/dashboard_details/booking_history?freelancers__id=${f_id}&booking_status=${type}`,
+        `${apiUrl}/api/book_service/service_booking?freelancers__id=${f_id}&booking_status=${type}`,
     accept_decline_service: `${apiUrl}/api/book_service/accept_service`
 };
 

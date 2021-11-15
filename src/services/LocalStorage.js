@@ -9,9 +9,8 @@ const LocalStorageService = (function () {
     function __getAccessToken(token) {
         if (localStorage.getItem("tza_access_token")) {
             return localStorage.getItem("tza_access_token");
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**---get token from localStorage */
@@ -24,6 +23,12 @@ const LocalStorageService = (function () {
         window.localStorage.removeItem("tza_role");
         localStorage.setItem("tza_role", _role);
     }
+    function __getRole() {
+        if (localStorage.getItem("tza_role")) {
+            return localStorage.getItem("tza_role");
+        }
+        return null;
+    }
     /**---remove role  to localStorage */
     function __removeRole(_role) {
         window.localStorage.removeItem("tza_role");
@@ -34,6 +39,7 @@ const LocalStorageService = (function () {
         getAccessToken: __getAccessToken,
         removeAccessToken: __removeToken,
         setRole: __setRole,
+        getRole: __getRole,
         removeRole: __removeRole
     };
 })();

@@ -66,7 +66,7 @@ export const reducerObj = {
     },
     [ordersConstants.SET_ORDERS_COMPLETED]: (prevState, payload) => {
         return {
-            fetchedCompletedOrders: payload.bookings_history,
+            fetchedCompletedOrders: payload.data,
             isLoading: {
                 ...prevState.isLoading,
                 completed: false
@@ -75,7 +75,7 @@ export const reducerObj = {
     },
     [ordersConstants.SET_ORDERS_UPCOMING]: (prevState, payload) => {
         return {
-            fetchedUpcomingOrders: payload.bookings_history,
+            fetchedUpcomingOrders: payload.data,
             isLoading: {
                 ...prevState.isLoading,
                 upcoming: false
@@ -84,7 +84,7 @@ export const reducerObj = {
     },
     [ordersConstants.SET_ORDERS_DECLINED]: (prevState, payload) => {
         return {
-            fetchedDeclinedOrders: payload.bookings_history,
+            fetchedDeclinedOrders: payload.data,
             isLoading: {
                 ...prevState.isLoading,
                 declined: false
@@ -93,7 +93,7 @@ export const reducerObj = {
     },
     [ordersConstants.SET_ORDERS_PENDING]: (prevState, payload) => {
         return {
-            fetchedPendingOrders: payload.bookings_history,
+            fetchedPendingOrders: payload.data,
             isLoading: {
                 ...prevState.isLoading,
                 pending: false
