@@ -12,7 +12,6 @@ import { setAuthDetails } from "../redux/actions/auth/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { apiUrls } from "../urls/apiUrls";
 import { checkEmptyObject } from "../utils/helper";
-import NoFoundComponent from "../components/404/404";
 
 const Header = React.lazy(() => import("../components/common/Header/index"));
 const Login = React.lazy(() =>
