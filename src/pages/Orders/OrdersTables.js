@@ -3,12 +3,9 @@ import clsx from "clsx";
 import {
     Box,
     Button,
-    Checkbox,
     Grid,
     TableCell,
-    TableHead,
     TableRow,
-    TableSortLabel,
     Typography
 } from "@material-ui/core";
 import DataTableSkeleton from "../../components/DataTable/DataTableSkeleton";
@@ -54,7 +51,7 @@ function completedOrdersTables(props) {
             disablePadding: true,
             label: "Booking ID",
             align: "left",
-            sort: true,
+            sort: false,
             customClass: clsx()
         },
         {
@@ -87,15 +84,18 @@ function completedOrdersTables(props) {
             disablePadding: false,
             label: "Amount",
             align: "right",
-            customClass: clsx()
+            customClass: clsx(),
+			sort: true
         },
         {
-            id: "booked_time",
-            numeric: false,
+            id: "booked_date_time",
+            numeric: true,
             disablePadding: false,
             label: "Booked Time",
             align: "left",
-            customClass: clsx()
+            customClass: clsx(),
+			sort: true,
+			isTime: true
         }
     ];
     return (
@@ -277,7 +277,6 @@ function declinedOrdersTables(props) {
 }
 
 function getTableRowContent(_props) {
-    console.log(_props);
     return _props.headCells.map((_h, _i) => {
         return (
             <TableCell component="td" scope="row" className={""} key={_i}>
@@ -291,6 +290,14 @@ function getTableRowContent(_props) {
     });
 }
 function getTableCellContent({ id }, _value, actioncallback) {
+    const time_options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    };
+
     switch (id) {
         case "id":
             return (
@@ -339,13 +346,15 @@ function getTableCellContent({ id }, _value, actioncallback) {
                     {_value.amount}
                 </Typography>
             );
-        case "booked_time":
+        case "booked_date_time":
             return (
                 <Typography
                     variant="body1"
                     className=" text--md text-color__black"
                 >
-                    {_value.booking_date}
+                    {new Date(
+                        `${_value.booking_date} ${_value.booking_time}`
+                    ).toLocaleDateString("en-US", time_options)}
                 </Typography>
             );
         case "approve_reject_action":
