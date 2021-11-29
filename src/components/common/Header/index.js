@@ -13,8 +13,17 @@ import { ReactComponent as Mail } from "../../../assets/images/mail.svg";
 import { ReactComponent as Setting } from "../../../assets/images/settings.svg";
 import { Link } from "react-router-dom";
 import "./header.scss";
+import { routeUrls } from "../../../urls/routeUrls";
+import { useSelector } from "react-redux";
+import { capitalizeFirstLetter } from "../../../utils/helper";
 
 export default function Header() {
+	const {
+        user_details: {
+            profile_image,
+            user_details: { first_name }
+        }
+    } = useSelector((state) => state.AuthReducer);
     return (
         <Grid container className="tza__header" id="TZ__header">
             <Container maxWidth={false}>
@@ -54,7 +63,7 @@ export default function Header() {
                             display="inline-flex"
                             className="tza__header--notifications tza__header--icons"
                         >
-                            <Badge color="default" badgeContent={1}>
+                            <Badge color="default" badgeContent={0}>
                                 <Notification />
                             </Badge>
                         </Box>
@@ -63,36 +72,34 @@ export default function Header() {
                             display="inline-flex"
                             className="tza__header--messages tza__header--icons"
                         >
-                            <Badge color="default" badgeContent={10}>
+                            <Badge color="default" badgeContent={0}>
                                 <Mail />
                             </Badge>
                         </Box>
-                        <Box component="div" className="tza__header--profile">
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/static/images/avatar/1.jpg"
-                            />
-                            <Typography
-                                variant="caption"
-                                className="tza__header--username"
+                        <Link to={routeUrls.profile.individual}>
+                            <Box
+                                component="div"
+                                className="tza__header--profile"
                             >
-                                {"Rahul"}
-                            </Typography>
-                            {/* <Box
-                                component="span"
-                                display="inline-flex"
-                                className=""
-                            >
-                             
-                            </Box> */}
-                        </Box>
-                        <Box
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src={profile_image}
+                                />
+                                <Typography
+                                    variant="caption"
+                                    className="tza__header--username"
+                                >
+									{capitalizeFirstLetter(first_name)}
+                                </Typography>
+                            </Box>
+                        </Link>
+                        {/* <Box
                             component="div"
                             display="inline-flex"
                             className="tza__header--settings tza__header--icons"
                         >
                             <Setting />
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Box>
             </Container>

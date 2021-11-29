@@ -6,5 +6,8 @@ const commonUrls = {
 	dashboard: '/dashboard',
 	orders: '/orders'
 };
+const profile = {
+	individual: "/profile"
+}
 
-export const routeUrls = { commonUrls };
+export const routeUrls = { commonUrls, profile };

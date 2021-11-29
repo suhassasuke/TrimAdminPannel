@@ -11,7 +11,8 @@ const userUrls = {
 		if(role === "freelancer"){
 			return `${apiUrl}/api/freelancers/freelancer_details`
 		}
-	}
+	},
+	profile_pic_update: `${apiUrl}/api/freelancers/update_freelancer_img`
 };
 const ordersUrls = {
     get_orders: `${apiUrl}/api/dashboard_details/booking_history`,

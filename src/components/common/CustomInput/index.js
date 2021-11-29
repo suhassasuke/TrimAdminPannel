@@ -83,7 +83,8 @@ export default function CustomInput(props) {
         validation = {},
         inputBottomLabel = null,
         isError = false,
-        errorMsg = ""
+        errorMsg = "",
+        disabled = false
     } = props;
     const [inputValue, setInputValue] = useState("");
     const [passwordShow, setPasswordShow] = useState(false);
@@ -93,19 +94,19 @@ export default function CustomInput(props) {
     const classes = useStyle();
 
     const handleChange__input = (e) => {
-        const { value } = e.target;
+        const _value = e.target.value;
         if (validation.regex !== undefined && validation.regexOnInputCheck) {
-            if (!validation.regex.test(value)) {
+            if (!validation.regex.test(_value)) {
                 return false;
             }
         }
         if (
             validation.maxLength &&
-            String(value).length > validation.maxLength
+            String(_value).length > validation.maxLength
         ) {
             return false;
         }
-        setInputValue(e.target.value);
+        setInputValue(e.target._value);
     };
     const handleChange__select = (e) => {
         let _error = false,
@@ -157,6 +158,7 @@ export default function CustomInput(props) {
                         }}
                         id={`select-${name}`}
                         onBlur={handleOnBlur}
+                        disabled={disabled}
                     >
                         <MenuItem value="">
                             <em>Select</em>
@@ -217,6 +219,7 @@ export default function CustomInput(props) {
                                 {startAdornment}
                             </InputAdornment>
                         }
+                        disabled={disabled}
                     />
                 );
             default:

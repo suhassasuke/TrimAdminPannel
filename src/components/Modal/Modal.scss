@@ -1,0 +1,12 @@
+@import "../../style/init/variables";
+
+.tmz__modal{
+	.MuiDialogTitle-root{
+		border-bottom: 1px solid $grey400;
+		.MuiTypography-root{
+			text-align: center;
+		}
+	}.MuiDialogActions-root{
+		border-top: 1px solid $grey400;
+	}
+}

@@ -1,0 +1,47 @@
+@import "../../style/init/variables";
+
+$imageSize: 250px;
+.tmz__profile--image {
+    // height: $imageSize;
+    width: $imageSize;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: $spacing4 0;
+
+    .tmz__profile--image_wrapper {
+        background-color: $grey100;
+        border-radius: 50%;
+        height: $imageSize;
+        width: $imageSize;
+        overflow: hidden;
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .tmz__profile--image_actions {
+        height: 40px;
+        width: 40px;
+        background-color: $white;
+        z-index: 10;
+        top: calc(#{$imageSize} - 50px);
+        left: calc(#{$imageSize} - 50px);
+        border-radius: 50%;
+        border: 1px solid $grey400;
+        cursor: pointer;
+    }
+}
+.tmz__profile--infoBox {
+    padding: $spacing5 0;
+}
+
+.tmz__profile--image_modal {
+    max-height: 600px;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    img {
+        height: 100%;
+    }
+}

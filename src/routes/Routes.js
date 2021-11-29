@@ -8,7 +8,7 @@ import PrivateRoute from "./auth/common/PrivateRoute";
 import AppWrapper from "../components/common/PageStructure/AppWrapper";
 import axios from "axios";
 import { userServices } from "../services/user.services";
-import { setAuthDetails } from "../redux/actions/auth/auth.actions";
+import { authUserActions } from "../redux/actions/auth/auth.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { apiUrls } from "../urls/apiUrls";
 import { checkEmptyObject } from "../utils/helper";
@@ -22,6 +22,7 @@ const Register = React.lazy(() =>
 );
 const Dashboard = React.lazy(() => import("../pages/DashBoard"));
 const Orders = React.lazy(() => import("../pages/Orders"));
+const Profile = React.lazy(() => import("../pages/Profile"));
 
 function Routes() {
     const { user_details } = useSelector((state) => state.AuthReducer);
@@ -45,7 +46,7 @@ function Routes() {
             })
                 .then((res) => {
                     if (res.status === 200) {
-                        dispatch(setAuthDetails(res.data));
+                        dispatch(authUserActions.setAuthDetails(res.data));
                         setIsInitCheck(true);
                     }
                 })
@@ -108,6 +109,17 @@ function Routes() {
                                 render={(_props) => (
                                     <AppWrapper isSidebar={true}>
                                         <Orders {..._props} />
+                                    </AppWrapper>
+                                )}
+                            />
+                        )}
+                        {isInitCheck && (
+                            <PrivateRoute
+                                path={routeUrls.profile.individual}
+                                exact
+                                render={(_props) => (
+                                    <AppWrapper isSidebar={true}>
+                                        <Profile {..._props} />
                                     </AppWrapper>
                                 )}
                             />

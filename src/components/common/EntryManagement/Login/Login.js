@@ -10,9 +10,9 @@ import "../styleEM.scss";
 import clsx from "clsx";
 import { userActions } from "../../../../redux/actions/auth/user.action";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthDetails } from "../../../../redux/actions/auth/auth.actions";
 import ToastService from "../../../../services/toast.services";
 import { userServices } from "../../../../services/user.services";
+import { authUserActions } from "../../../../redux/actions/auth/auth.actions";
 
 export default function SignIn(props) {
     const history = useHistory();
@@ -102,7 +102,7 @@ export default function SignIn(props) {
                 setLoginButtonDisabled(false);
             } else {
                 ToastService.success(userDetails.message);
-                dispatch(setAuthDetails(userDetails,'login'));
+                dispatch(authUserActions.setAuthDetails(userDetails,'login'));
             }
         }
     }, [status]);
